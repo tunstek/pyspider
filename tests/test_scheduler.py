@@ -837,8 +837,8 @@ class TestProject(unittest.TestCase):
             self.project.active_tasks.appendleft((time.time(), dict(self.task_pack)))
         self.assertTrue(self.project.paused)
         # check the received email
-        email_output_file_path = os.environ['TRAVIS_BUILD_DIR'] + "smtp_test.log"
-        with open(email_output_file_path, "r") as f:
+        smtp_output_path = os.environ['TRAVIS_BUILD_DIR'] + "/" + os.environ['SMTP_TEST_SERVER_OUTPUT_PATH']
+        with open(smtp_output_path, "r") as f:
             email_contents = f.read()
         logging.info("Email File Contents: {}".format(email_contents))
         self.assertTrue("PySpider TEST Body" in email_contents)

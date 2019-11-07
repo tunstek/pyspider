@@ -8,4 +8,5 @@
 import os
 import unittest
 
+os.environ['SMTP_TEST_SERVER_OUTPUT_PATH'] = 'smtp_test.log'
 all_suite = unittest.TestLoader().discover(os.path.dirname(__file__), "test_*.py")
