@@ -840,7 +840,7 @@ class TestProject(unittest.TestCase):
         smtp_output_path = os.environ['TRAVIS_BUILD_DIR'] + "/" + os.environ['SMTP_TEST_SERVER_OUTPUT_PATH']
         with open(smtp_output_path, "r") as f:
             email_contents = f.read()
-        logging.info("Email File Contents: {}".format(email_contents))
+        logging.info("Email File: {} Contents: {}".format(smtp_output_path, email_contents))
         self.assertTrue("PySpider TEST Body" in email_contents)
 
     def test_pause_40_unpause_checking(self):
