@@ -836,6 +836,12 @@ class TestProject(unittest.TestCase):
         for i in range(self.scheduler.FAIL_PAUSE_NUM):
             self.project.active_tasks.appendleft((time.time(), dict(self.task_pack)))
         self.assertTrue(self.project.paused)
+        # check the received email
+        email_output_file_path = os.environ['TRAVIS_BUILD_DIR'] + "smtp_test.log"
+        with open(email_output_file_path, "r") as f:
+            email_contents = f.read()
+        logging.info("Email File Contents: {}".format(email_contents))
+        self.assertTrue("PySpider TEST Body" in email_contents)
 
     def test_pause_40_unpause_checking(self):
         time.sleep(3)

@@ -5,12 +5,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 class EmailSender():
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self._SENDER_EMAIL = "alert@pyspider.py"
         self._SMTP_HOST = os.environ['SMTP_HOST'] or 'localhost'
         self._SMTP_HOST = os.environ['SMTP_PORT'] or 25
         self._RECEIVER_EMAIL = os.environ['SMTP_EMAIL_ADDRESS'] or 'test@test.test'
         self._PASSWORD = os.environ['SMTP_EMAIL_PASSWORD'] or 'password'
+        self.send_email(*args, **kwargs)
 
     def __call__(self, *args, **kwargs):
         self.send_email(*args, **kwargs)
