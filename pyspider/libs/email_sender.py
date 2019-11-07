@@ -10,7 +10,7 @@ class EmailSender():
         self._SMTP_HOST = os.environ.get('SMTP_HOST') or 'localhost'
         self._SMTP_PORT = os.environ.get('SMTP_PORT') or 587
         self._RECEIVER_EMAIL = os.environ.get('SMTP_EMAIL_ADDRESS') or 'test@test.test'
-        self._PASSWORD = os.environ.get('SMTP_EMAIL_PASSWORD') or 'password'
+        self._PASSWORD = os.environ.get('SMTP_EMAIL_PASSWORD') or None
         self.send_email(*args, **kwargs)
 
     def __call__(self, *args, **kwargs):
@@ -35,7 +35,10 @@ class EmailSender():
 
         # Create secure connection with server and send email
         with smtplib.SMTP(self._SMTP_HOST, self._SMTP_PORT) as server:
-            server.login(self._RECEIVER_EMAIL, self._PASSWORD)
+            server.connect(self._SMTP_HOST, self._SMTP_PORT)
+            server.ehlo()
+            if self._PASSWORD is not None:
+                server.login(self._RECEIVER_EMAIL, self._PASSWORD)
             server.sendmail(
                 self._SENDER_EMAIL, self._RECEIVER_EMAIL, message.as_string()
             )

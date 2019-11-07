@@ -38,7 +38,7 @@ before_script:
     - psql -c "CREATE DATABASE pyspider_test_projectdb ENCODING 'UTF8' TEMPLATE=template0;" -U postgres
     - psql -c "CREATE DATABASE pyspider_test_resultdb ENCODING 'UTF8' TEMPLATE=template0;" -U postgres
     #- pwd # /home/travis/build/tunstek/pyspider
-    - sudo nohup python -m smtpd -c DebuggingServer -n localhost:587 > smtp_test.log 2>&1 & # run the test smtp server
+    - sudo nohup python -c "import smtpd, asyncore; smtpd.DebuggingServer(('127.0.0.1', 587), None); asyncore.loop()" > smtp_test.log 2>&1 & # run the test smtp server
     - sleep 10
 install:
     - pip install https://github.com/marcus67/easywebdav/archive/master.zip
