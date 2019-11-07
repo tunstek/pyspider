@@ -16,7 +16,7 @@ from collections import deque
 from six import iteritems, itervalues
 from six.moves import queue as Queue
 
-from pyspider.libs import counter, utils
+from pyspider.libs import counter, utils, email_sender
 from pyspider.libs.base_handler import BaseHandler
 from .task_queue import TaskQueue
 
@@ -71,6 +71,8 @@ class Project(object):
                 if fail_cnt >= self.scheduler.FAIL_PAUSE_NUM:
                     break
             if fail_cnt >= self.scheduler.FAIL_PAUSE_NUM:
+                # TODO: SEND EMAIL ALERT
+                email_sender.EmailSender("PySpider TEST Subject", "PySpider TEST Body")
                 self._paused = True
                 self._paused_time = time.time()
         elif self._paused is True and (self._paused_time + self.scheduler.PAUSE_TIME < time.time()):

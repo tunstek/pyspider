@@ -37,6 +37,8 @@ before_script:
     - psql -c "CREATE DATABASE pyspider_test_taskdb ENCODING 'UTF8' TEMPLATE=template0;" -U postgres
     - psql -c "CREATE DATABASE pyspider_test_projectdb ENCODING 'UTF8' TEMPLATE=template0;" -U postgres
     - psql -c "CREATE DATABASE pyspider_test_resultdb ENCODING 'UTF8' TEMPLATE=template0;" -U postgres
+    - pwd
+    - nohup python -m smtpd -c DebuggingServer -n localhost:25 > smtp_test.log & # run the test smtp server
     - sleep 10
 install:
     - pip install https://github.com/marcus67/easywebdav/archive/master.zip
