@@ -17,6 +17,8 @@ class EmailSender():
         self.send_email(*args, **kwargs)
 
     def send_email(self, subject, text, html=None):
+        if html is None:
+            html = ''
         message = MIMEMultipart("alternative")
         message["Subject"] = subject
         message["From"] = self._SENDER_EMAIL
