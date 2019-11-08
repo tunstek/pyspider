@@ -72,8 +72,8 @@ class Project(object):
                     break
             if fail_cnt >= self.scheduler.FAIL_PAUSE_NUM:
                 # TODO: SEND EMAIL ALERT
-                logger.info("Sending Email Alert..")
-                email_sender.EmailSender("PySpider TEST Subject", "PySpider TEST Body")
+                email_sender.EmailSender("PySpider - Project {} has been paused due to failures!".format(self.name),
+                                         "PySpider TEST Body")
                 self._paused = True
                 self._paused_time = time.time()
         elif self._paused is True and (self._paused_time + self.scheduler.PAUSE_TIME < time.time()):

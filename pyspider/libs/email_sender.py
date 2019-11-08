@@ -8,7 +8,7 @@ class EmailSender():
     def __init__(self, *args, **kwargs):
         self._SENDER_EMAIL = "alert@pyspider.py"
         self._SMTP_HOST = os.environ.get('SMTP_HOST') or 'localhost'
-        self._SMTP_PORT = os.environ.get('SMTP_PORT') or 587
+        self._SMTP_PORT = os.environ.get('SMTP_PORT') or 8025
         self._RECEIVER_EMAIL = os.environ.get('SMTP_EMAIL_ADDRESS') or 'test@test.test'
         self._PASSWORD = os.environ.get('SMTP_EMAIL_PASSWORD') or None
         self.send_email(*args, **kwargs)
